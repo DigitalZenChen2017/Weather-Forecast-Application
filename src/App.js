@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/layout/Header';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import WeatherContainer from './components/weatherCards/weatherContainer';
 
 class App extends Component {
   state = {};
@@ -15,6 +16,12 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header />
+          {/* <Route exact path="/" render={
+            props => (
+              <WeatherWeek>
+            )
+          }/> */}
+          <WeatherContainer />
         </div>
       </Router>
     );

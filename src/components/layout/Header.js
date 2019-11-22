@@ -1,8 +1,6 @@
 import React from 'react';
 import Logo from '../assets/Weather-App-LogoFINAL.png';
 
-console.log(Logo);
-
 function Header() {
   return (
     <nav className="justify-content-center navbar navbar-expand-md navbar-dark bg-dark">
