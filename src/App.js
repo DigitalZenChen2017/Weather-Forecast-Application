@@ -10,26 +10,68 @@ class App extends Component {
   state = {
     city: undefined,
     country: undefined,
-    temperature: undefined,
+    weatherCondition: undefined,
+    fiveDayTemperature: {
+      highs: [],
+      lows: []
+    },
+    windSpeed: undefined,
+    error: undefined
   };
 
-  async componentDidMount() {
-    await fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.city},${this.state.countryCode}&mode=xml&appid=${OPEN_WEATHER_KEY}`
-    ).then(response => response.text());
-    // .then(data => {
-    //   document.getElementById('response').innerHTML = data;
-    // });
-  }
+  // Method for making the API Call
+  getWeather = async e => {
+    const city = e.target.elements.city.value;
+    // const country = e.target.elements.country.value;
+    e.preventDefault();
+    const api_call = await fetch(
+      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&mode=json&appid=${OPEN_WEATHER_KEY}`
+    );
+    const response = await api_call.json();
+    console.log(response);
+    city
+      ? this.setState({
+          city: response.city.name,
+          country: response.city.country,
+          weatherCondition: response.list[0].weather[0].main,
+          fiveDayTemperature: {
+            highs: '',
+            lows: ''
+          },
+          windSpeed: Math.floor(response.list[0].wind.speed),
+          error: undefined
+        })
+      : this.setState({
+          error: 'Invalid City Name! Please Enter a Valid City.'
+        });
+    console.log('state key value pairs: ', this.state);
+  };
+
+  // async componentDidMount() {
+  //   await fetch(
+  //     `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.city},${this.state.countryCode}&mode=xml&appid=${OPEN_WEATHER_KEY}`
+  //   ).then(response => response.text());
+  //   // .then(data => {
+  //   //   document.getElementById('response').innerHTML = data;
+  //   // });
+  // }
 
   render() {
     return (
       <Router>
         <div className="App">
           <Header />
-          <WeatherCard />
+          <WeatherCard
+            city={this.state.city}
+            country={this.state.country}
+            weatherCondition={this.state.weatherCondition}
+            weeklyHighs={this.state.fiveDayTemperature.highs}
+            weeklyLows={this.state.fiveDayTemperature.lows}
+            windSpeed={this.state.windSpeed}
+            error={this.state.error}
+          />
           {/* <p id="response"></p> */}
-          <Form />
+          <Form loadWeather={this.getWeather} />
         </div>
       </Router>
     );

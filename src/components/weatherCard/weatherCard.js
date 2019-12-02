@@ -4,7 +4,7 @@ import styles from './weatherCardStyle.module.css';
 function weatherCard() {
   return (
     <div className={styles.card}>
-      <h2>Brussels</h2>
+      <h2>Cincinnati</h2>
       <h3>
         Cloudy
         <span>

@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './formStyles.module.css';
 
-export default function form() {
+const form = props => {
   return (
-    <form className={styles.form}>
+    <form onSubmit={props.loadWeather}>
       <label style={{ color: 'whitesmoke' }}>Enter City:</label>
-      <input type="text" name="city" />
+      <input type="text" name="city" placeholder="City Name" />
       <input
         className={styles.submit}
         type="submit"
@@ -13,4 +13,6 @@ export default function form() {
       />
     </form>
   );
-}
+};
+
+export default form;
