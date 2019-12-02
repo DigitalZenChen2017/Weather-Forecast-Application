@@ -1,3 +1,9 @@
 .App {
   font-family: 'Ropa Sans', sans-serif;
+  background: url('./components/assets/background-1.jpg') no-repeat center
+    center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }

@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/layout/Header';
 import { BrowserRouter as Router } from 'react-router-dom';
-import WeatherContainer from './components/weatherCards/weatherContainer';
+import WeatherCard from './components/weatherCard/weatherCard';
 import { OPEN_WEATHER_KEY } from './apiKey';
 import Form from './components/input/form';
 
 class App extends Component {
   state = {
-    city: 'Cincinnati',
-    countryCode: 'US',
-    days: '7'
+    city: undefined,
+    country: undefined,
+    temperature: undefined,
   };
 
   async componentDidMount() {
@@ -27,7 +27,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header />
-          <WeatherContainer />
+          <WeatherCard />
           {/* <p id="response"></p> */}
           <Form />
         </div>
