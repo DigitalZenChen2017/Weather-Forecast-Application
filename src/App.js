@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './components/layout/Header';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import WeatherContainer from './components/weatherCards/weatherContainer';
+import { OPEN_WEATHER_KEY } from './apiKey';
 
 class App extends Component {
-  state = {};
+  state = {
+    city: 'Cincinnati',
+    countryCode: 'US',
+    days: '7'
+  };
 
-  componentDidMount() {
-    // Insert Axios API GET method to retrieve Weather data
+  async componentDidMount() {
+    await fetch(
+      `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.city},${this.state.countryCode}&mode=xml&appid=${OPEN_WEATHER_KEY}`
+    )
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('response').innerHTML = data;
+      });
   }
 
   render() {
@@ -16,12 +27,8 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header />
-          {/* <Route exact path="/" render={
-            props => (
-              <WeatherWeek>
-            )
-          }/> */}
           <WeatherContainer />
+          <p id="response"></p>
         </div>
       </Router>
     );
