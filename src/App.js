@@ -4,6 +4,7 @@ import Header from './components/layout/Header';
 import { BrowserRouter as Router } from 'react-router-dom';
 import WeatherContainer from './components/weatherCards/weatherContainer';
 import { OPEN_WEATHER_KEY } from './apiKey';
+import Form from './components/input/form';
 
 class App extends Component {
   state = {
@@ -15,11 +16,10 @@ class App extends Component {
   async componentDidMount() {
     await fetch(
       `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.city},${this.state.countryCode}&mode=xml&appid=${OPEN_WEATHER_KEY}`
-    )
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('response').innerHTML = data;
-      });
+    ).then(response => response.text());
+    // .then(data => {
+    //   document.getElementById('response').innerHTML = data;
+    // });
   }
 
   render() {
@@ -28,7 +28,8 @@ class App extends Component {
         <div className="App">
           <Header />
           <WeatherContainer />
-          <p id="response"></p>
+          {/* <p id="response"></p> */}
+          <Form />
         </div>
       </Router>
     );

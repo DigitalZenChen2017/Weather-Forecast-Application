@@ -1,0 +1,15 @@
+form {
+  display: block;
+  text-align: center;
+  font-size: larger;
+  margin-top: 1.4rem;
+}
+
+label,
+input {
+  margin: 0.3rem 0.3rem;
+}
+
+.submit {
+  margin: 0 0.5rem;
+}
