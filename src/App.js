@@ -11,18 +11,21 @@ class App extends Component {
     city: undefined,
     country: undefined,
     weatherCondition: undefined,
+    currentDegree: undefined,
     fiveDayTemperature: {
       highs: [],
       lows: []
     },
     windSpeed: undefined,
-    error: undefined
+    error: undefined,
+    showCard: false
   };
 
   // Method for making the API Call
   getWeather = async e => {
     const city = e.target.elements.city.value;
     // const country = e.target.elements.country.value;
+    this.state.showCard = true;
     e.preventDefault();
     const api_call = await fetch(
       `http://api.openweathermap.org/data/2.5/forecast?q=${city}&mode=json&appid=${OPEN_WEATHER_KEY}`
@@ -82,6 +85,7 @@ class App extends Component {
             weeklyLows={this.state.fiveDayTemperature.lows}
             windSpeed={this.state.windSpeed}
             error={this.state.error}
+            showCard={this.state.showCard}
           />
           <Form loadWeather={this.getWeather} />
         </div>
