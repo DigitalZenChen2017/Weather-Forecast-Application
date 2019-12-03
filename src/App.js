@@ -35,8 +35,12 @@ class App extends Component {
           country: response.city.country,
           weatherCondition: response.list[0].weather[0].main,
           fiveDayTemperature: {
-            highs: '',
-            lows: ''
+            highs: Math.floor(
+              (response.list[0].main.temp_max - 273.15) * (9 / 5) + 32
+            ),
+            lows: Math.floor(
+              (response.list[0].main.temp_min - 273.15) * (9 / 5) + 32
+            )
           },
           windSpeed: Math.floor(response.list[0].wind.speed),
           error: undefined

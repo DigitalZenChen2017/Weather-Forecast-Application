@@ -31,12 +31,26 @@ function weatherCard() {
           </tr>
         </thead>
         <tbody>
+          <tr className={styles.highlows}>
+            <td>H</td>
+            <td>H</td>
+            <td>H</td>
+            <td>H</td>
+            <td>H</td>
+          </tr>
           <tr>
             <td>30°</td>
             <td>34°</td>
             <td>36°</td>
             <td>34°</td>
             <td>37°</td>
+          </tr>
+          <tr className={styles.highlows}>
+            <td>L</td>
+            <td>L</td>
+            <td>L</td>
+            <td>L</td>
+            <td>L</td>
           </tr>
           <tr>
             <td>17°</td>
