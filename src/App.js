@@ -29,18 +29,36 @@ class App extends Component {
     );
     const response = await api_call.json();
     console.log(response);
+    const dayTimeArray = response.list;
+    console.log(dayTimeArray);
+
+    const fiveDayTime = [];
+
+    for (let i = 0; i < dayTimeArray.length; i += 8) {
+      fiveDayTime.push(dayTimeArray[i]);
+      console.log(i);
+    }
+    console.log('new fiveDayTime', fiveDayTime);
+
+    const fiveDayTempMaxFahrenheit = fiveDayTime.map(fiveDay => {
+      return Math.floor((fiveDay.main.temp_max - 273.15) * (9 / 5) + 32);
+    });
+    console.log('fiveDayTempMaxArray: ', fiveDayTempMaxFahrenheit);
+
+    const fiveDayTempMinFahrenheit = fiveDayTime.map(fiveDay => {
+      return Math.floor((fiveDay.main.temp_min - 273.15) * (9 / 5) + 32);
+    });
+
+    console.log('fiveDayTempMinArray: ', fiveDayTempMinFahrenheit);
+
     city
       ? this.setState({
           city: response.city.name,
           country: response.city.country,
           weatherCondition: response.list[0].weather[0].main,
           fiveDayTemperature: {
-            highs: Math.floor(
-              (response.list[0].main.temp_max - 273.15) * (9 / 5) + 32
-            ),
-            lows: Math.floor(
-              (response.list[0].main.temp_min - 273.15) * (9 / 5) + 32
-            )
+            highs: fiveDayTempMaxFahrenheit,
+            lows: fiveDayTempMinFahrenheit
           },
           windSpeed: Math.floor(response.list[0].wind.speed),
           error: undefined
@@ -50,15 +68,6 @@ class App extends Component {
         });
     console.log('state key value pairs: ', this.state);
   };
-
-  // async componentDidMount() {
-  //   await fetch(
-  //     `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.city},${this.state.countryCode}&mode=xml&appid=${OPEN_WEATHER_KEY}`
-  //   ).then(response => response.text());
-  //   // .then(data => {
-  //   //   document.getElementById('response').innerHTML = data;
-  //   // });
-  // }
 
   render() {
     return (
@@ -74,7 +83,6 @@ class App extends Component {
             windSpeed={this.state.windSpeed}
             error={this.state.error}
           />
-          {/* <p id="response"></p> */}
           <Form loadWeather={this.getWeather} />
         </div>
       </Router>
