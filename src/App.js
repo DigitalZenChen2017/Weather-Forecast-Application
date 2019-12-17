@@ -21,7 +21,7 @@ class App extends Component {
     showCard: false
   };
 
-  // Method for making the API Call
+  // Method for making the API Call, e is the event parameter
   getWeather = async e => {
     const city = e.target.elements.city.value;
     // const country = e.target.elements.country.value;
